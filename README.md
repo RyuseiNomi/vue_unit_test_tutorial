@@ -31,3 +31,7 @@ $ yarn test
 └── main.js
 ```
 
+## 参考
+
+[Vue コンポーネントの単体テスト](https://jp.vuejs.org/v2/cookbook/unit-testing-vue-components.html)
+[Vue.js ユニットテストの基本まとめ](https://qiita.com/kskinaba/items/d23259060e6e13b7353c)
