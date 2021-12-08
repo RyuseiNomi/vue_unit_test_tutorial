@@ -4,15 +4,53 @@
 import { shallowMount } from '@vue/test-utils'
 import NameTextArea from '@/components/NameTextArea.vue'
 
-test('Hello', () => {
-  // コンポーネントの描画
-  const wrapper = shallowMount(NameTextArea)
+describe('NameTextArea', () => {
 
-  // 入力が 7 文字以下の場合にエラーを表示すること
-  wrapper.setData({ username: 'short' })
-  expect(wrapper.find('.error').exists()).toBe(true)
+  it('名前が 7 文字以上の場合にエラーを表示しないこと', () => {
+    // コンポーネントの描画
+    const wrapper = shallowMount(NameTextArea, {
+      data () {
+        return {
+          username: 'oversevencharacters'
+        }
+      },
+    })
+    expect(wrapper.find('.error').exists()).toBeFalsy()
+  })
 
-  // 入力が 7 文字以上の場合にエラーを表示しないこと
-  //wrapper.setData({ username: 'oversevencharacters' })
-  //expect(wrapper.find('.error').exists()).toBe(false)
+  it('名前が 7 文字未満の場合にエラーを表示すること', () => {
+    // コンポーネントの描画
+    const wrapper = shallowMount(NameTextArea, {
+      data () {
+        return {
+          username: 'short'
+        }
+      },
+    })
+    expect(wrapper.find('.error').exists()).toBeTruthy()
+  })
+
+  it('名前の先頭と末尾の空白スペースを取り除いて文字数をカウントすること', () => {
+    // コンポーネントの描画
+    const wrapper = shallowMount(NameTextArea, {
+      data () {
+        return {
+          username: '   abcdef    '
+        }
+      },
+    })
+    expect(wrapper.find('.error').exists()).toBeTruthy()
+  })
+
+  it('名前文字列の間のスペースはカウントすること', () => {
+    // コンポーネントの描画
+    const wrapper = shallowMount(NameTextArea, {
+      data () {
+        return {
+          username: 'a     b'
+        }
+      },
+    })
+    expect(wrapper.find('.error').exists()).toBeFalsy()
+  })
 })
