@@ -58,4 +58,12 @@ describe('NameTextArea', () => {
     await wrapper.setData({ username: 'oversevencharacters' })
     expect(wrapper.find('.submit-button').element.disabled).toBe(false)
   })
+
+  it('送信ボタンを押下するとアラートが表示されること', async() => {
+    window.alert = jest.fn();
+    await wrapper.setData({ username: 'oversevencharacters'})
+    const button = wrapper.find('button')
+    await button.trigger('click')
+    expect(window.alert).toBeCalled()
+  })
 })

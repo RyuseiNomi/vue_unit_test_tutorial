@@ -9,7 +9,7 @@
       文字数が足りません
     </div>
     <br>
-    <button class="submit-button" :disabled="isShowError">送信</button>
+    <button class="submit-button" :disabled="isShowError" @click="showAlert">送信</button>
   </div>
 </template>
 
@@ -33,6 +33,12 @@ export default {
      */
     isAbleToSubmit() {
       return this.isShowError();
+    }
+  },
+
+  methods: {
+    showAlert() {
+      alert('これはデモです。')
     }
   }
 }
